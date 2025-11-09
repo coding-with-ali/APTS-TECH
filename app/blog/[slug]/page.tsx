@@ -1,5 +1,3 @@
-'use client'
-
 import { client } from '@/sanity/lib/client'
 import { urlFor } from '@/sanity/lib/image'
 import { Post } from '@/types/post'
@@ -7,12 +5,8 @@ import Image from 'next/image'
 import { PortableText } from '@portabletext/react'
 import { CalendarDays, Clock } from 'lucide-react'
 
-interface BlogDetailProps {
-  params: { slug: string }
-}
-
-export default async function BlogDetail({ params }: BlogDetailProps) {
-  const slug = params?.slug
+export default async function BlogDetail({ params }: { params: { slug: string } }) {
+  const { slug } = params
 
   if (!slug) {
     return (
@@ -24,13 +18,13 @@ export default async function BlogDetail({ params }: BlogDetailProps) {
   }
 
   const query = `*[_type == "post" && slug.current == $slug][0]{
-  title,
-  date,
-  content,
-  thumbnail,
-  "author": author->name,
-  "authorImage": author->image
-}`
+    title,
+    date,
+    content,
+    thumbnail,
+    "author": author->name,
+    "authorImage": author->image
+  }`
 
   const post: Post | null = await client.fetch(query, { slug })
 
@@ -48,7 +42,6 @@ export default async function BlogDetail({ params }: BlogDetailProps) {
   return (
     <section className="bg-white min-h-screen py-10 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto overflow-hidden">
-        {/* Top Badge */}
         <div className="px-6 pt-8">
           <span className="inline-block bg-pink-100 text-pink-700 text-xs font-semibold px-3 py-1 rounded-full mb-4">
             Featured
@@ -58,18 +51,16 @@ export default async function BlogDetail({ params }: BlogDetailProps) {
           </h1>
         </div>
 
-        {/* Author Info */}
         <div className="flex flex-wrap items-center gap-3 px-6 text-sm text-gray-500 mb-6">
-          {(post as any).authorImage && (
-  <Image
-  src={urlFor(post.authorImage).width(64).height(64).url()!}
-  alt={post.author ?? 'Author image'}
-  width={40}
-  height={40}
-  className="rounded-full object-cover"
-/>
-)}
-
+          {post.authorImage && (
+            <Image
+              src={urlFor(post.authorImage).width(64).height(64).url()!}
+              alt={post.author ?? 'Author image'}
+              width={40}
+              height={40}
+              className="rounded-full object-cover"
+            />
+          )}
           <p className="text-gray-800 font-medium">{post.author}</p>
           <span>•</span>
           <div className="flex items-center gap-1">
@@ -88,7 +79,6 @@ export default async function BlogDetail({ params }: BlogDetailProps) {
           </div>
         </div>
 
-        {/* Featured Image */}
         {post.thumbnail && (
           <div className="relative w-full h-[250px] sm:h-[400px] md:h-[450px] mb-8 px-6">
             <div className="relative w-full h-full overflow-hidden rounded-xl">
@@ -102,7 +92,6 @@ export default async function BlogDetail({ params }: BlogDetailProps) {
           </div>
         )}
 
-        {/* Content */}
         <div className="px-6 pb-10 prose prose-gray max-w-none text-gray-700 leading-relaxed">
           <PortableText value={post.content as any} />
         </div>
