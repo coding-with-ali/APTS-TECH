@@ -5,8 +5,13 @@ import Image from 'next/image'
 import { PortableText } from '@portabletext/react'
 import { CalendarDays, Clock } from 'lucide-react'
 
-export default async function BlogDetail({ params }: { params: { slug: string } }) {
-  const { slug } = params
+interface PageProps {
+  params: Promise<{ slug: string }>
+}
+
+export default async function BlogDetail({ params }: PageProps) {
+  const { slug } = await params
+
 
   if (!slug) {
     return (
