@@ -49,7 +49,7 @@ export default function Education() {
         {/* Intro Section */}
         <div className="max-w-4xl mx-auto text-center mb-16">
           <motion.h2
-            className="text-4xl md:text-5xl font-bold text-indigo-900"
+            className="text-4xl md:text-5xl font-bold text-primary-700"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -89,7 +89,7 @@ export default function Education() {
 
         {/* Call to Action */}
         <motion.div
-          className="mt-20 bg-gradient-to-br from-[#0A0F2C] via-[#141E61] to-[#1E2A78] text-white text-center rounded-2xl py-12 px-6"
+          className="mt-20 bg-primary-900 text-white text-center rounded-2xl py-12 px-6"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.7 }}

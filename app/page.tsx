@@ -10,9 +10,9 @@ export default function Home() {
     <>
       <Hero />
       <div className="container py-16 space-y-20">
-        <Testimonial />
         <Awards/>
         <ServicesGrid />
+        <Testimonial />
         <CTASection />
         <PostCard/>
       </div>

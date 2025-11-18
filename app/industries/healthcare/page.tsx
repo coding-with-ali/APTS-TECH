@@ -43,7 +43,7 @@ export default function Healthcare() {
       <section className="container mx-auto px-6 py-20">
         <div className="max-w-4xl mx-auto text-center mb-16">
           <motion.h2
-            className="text-4xl md:text-5xl font-bold text-indigo-900"
+            className="text-4xl md:text-5xl font-bold text-primary-700"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -84,7 +84,7 @@ export default function Healthcare() {
 
         {/* Call to Action */}
         <motion.div
-          className="mt-20 bg-gradient-to-r from-indigo-700 to-indigo-500 text-white text-center "
+          className="mt-20 bg-primary-900 text-white text-center "
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.7 }}

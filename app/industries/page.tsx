@@ -37,16 +37,16 @@ const industries = [
 
 export default function Industries() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-[#0A0F2C] via-[#101B46] to-[#1E2A78] text-white py-24 px-6 md:px-12 lg:px-20">
+    <section className="relative overflow-hidden bg-primary-900 text-white py-24 px-6 md:px-12 lg:px-20">
       {/* 🌫️ Background Glow */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute -top-20 left-0 w-72 h-72 bg-indigo-500/20 blur-[120px] rounded-full" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-600/20 blur-[160px] rounded-full" />
+        <div className="absolute -top-20 left-0 w-72 h-72 bg-primary-700/20 blur-[120px] rounded-full" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-primary-500/20 blur-[160px] rounded-full" />
       </div>
 
       <div className="max-w-6xl mx-auto text-center">
         {/* 🧠 Heading */}
-        <h1 className="text-4xl md:text-5xl font-extrabold mb-6 bg-gradient-to-r from-indigo-300 to-blue-400 bg-clip-text text-transparent">
+        <h1 className="text-4xl md:text-5xl font-extrabold mb-6 bg-primary-500 bg-clip-text text-transparent">
           Industries <span className="text-white">We Serve</span>
         </h1>
         <p className="text-indigo-100/80 text-lg max-w-3xl mx-auto mb-16">
@@ -73,7 +73,7 @@ export default function Industries() {
 
                 <div className="relative z-10 text-left">
                   <div className="text-4xl mb-4">{ind.icon}</div>
-                  <h2 className="text-2xl font-semibold mb-3 text-indigo-200 group-hover:text-white transition-colors">
+                  <h2 className="text-2xl font-semibold mb-3 text-primary-500 group-hover:text-white transition-colors">
                     {ind.name}
                   </h2>
                   <p className="text-sm text-indigo-100/80 leading-relaxed">

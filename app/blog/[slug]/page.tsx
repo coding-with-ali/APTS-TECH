@@ -1,106 +1,241 @@
-import { client } from '@/sanity/lib/client'
-import { urlFor } from '@/sanity/lib/image'
-import { Post } from '@/types/post'
-import Image from 'next/image'
-import { PortableText } from '@portabletext/react'
-import { CalendarDays, Clock } from 'lucide-react'
+// import { client } from "@/sanity/lib/client";
+// import Image from "next/image";
+// import { PortableText } from "@portabletext/react";
+// import { PortableTextComponents } from "../../components/PortableTextComponents";
+// import { CalendarDays, Clock } from "lucide-react";
+// import { urlFor } from "@/sanity/lib/image";
 
-interface PageProps {
-  params: Promise<{ slug: string }>
-}
+// interface PageProps {
+//   params: { slug: string };
+// }
 
-export default async function BlogDetail({ params }: PageProps) {
-  const { slug } = await params
+// export default async function ServiceDetail({ params }: PageProps) {
+//   const { slug } = params;
+
+//   const query = `*[_type == "post" && slug.current == $slug][0]{
+//     title,
+//     date,
+//     content,
+//     thumbnail,
+//     "author": author->name
+//   }`;
+
+//   const post = await client.fetch(query, { slug });
+
+//   if (!post) {
+//     return (
+//       <div className="p-10 text-center text-white">Service not found.</div>
+//     );
+//   }
+
+//   return (
+//     <div className="bg-primary-900 text-white min-h-screen">
+
+//       {/* HERO IMAGE */}
+//       <section className="relative h-[100vh] w-full">
+      
+//           <Image
+//             src={urlFor(post.thumbnail).url()!}
+//             alt={post.title}
+//             fill
+//             className="object-fill w-full h-[100vh]" 
+//           />
+        
+//       </section>
+
+//       {/* BLOG CONTENT */}
+//       <section className="px-5 md:px-20 py-16 max-w-5xl mx-auto">
+//         {/* Title */}
+//         <h1 className="text-4xl md:text-5xl font-bold mb-4">{post.title}</h1>
+
+//         {/* Author & Date */}
+//         <div className="flex flex-wrap items-center text-gray-400 text-sm mb-8 gap-2">
+//           {post.author && <span>By {post.author}</span>}
+//           {post.author && post.date && <span>•</span>}
+//           {post.date && (
+//             <span className="flex items-center gap-1">
+//               <CalendarDays className="w-4 h-4" />
+//               {new Date(post.date).toLocaleDateString("en-US", {
+//                 year: "numeric",
+//                 month: "long",
+//                 day: "numeric",
+//               })}
+//             </span>
+//           )}
+//           <span>•</span>
+//           <span className="flex items-center gap-1">
+//             <Clock className="w-4 h-4" />
+//             5 min read
+//           </span>
+//         </div>
+
+//         {/* Content */}
+//         <div className="prose prose-invert prose-lg text-white leading-relaxed">
+//   {post.content && <PortableText value={post.content} components={PortableTextComponents} />}
+// </div>
+
+//       </section>
+//     </div>
+//   );
+// }
 
 
-  if (!slug) {
-    return (
-      <section className="container mx-auto px-6 py-20 text-center">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-2">Invalid URL</h2>
-        <p className="text-gray-500">No slug was provided.</p>
-      </section>
-    )
-  }
+
+// import { client } from "@/sanity/lib/client";
+// import Image from "next/image";
+// import { PortableText } from "@portabletext/react";
+// import { PortableTextComponents } from "../../components/PortableTextComponents";
+// import { CalendarDays, Clock } from "lucide-react";
+// import { urlFor } from "@/sanity/lib/image";
+
+// export default async function BlogDetails({
+//   params,
+// }: {
+//   params: { slug: string };
+// }) {
+//   const { slug } = params;
+
+//   const query = `*[_type == "post" && slug.current == $slug][0]{
+//     title,
+//     date,
+//     content,
+//     thumbnail,
+//     "author": author->name
+//   }`;
+
+//   const post = await client.fetch(query, { slug });
+
+//   if (!post) {
+//     return (
+//       <div className="p-10 text-center text-white">Service not found.</div>
+//     );
+//   }
+
+//   return (
+//     <div className="bg-primary-900 text-white min-h-screen">
+//       {/* HERO IMAGE */}
+//       <section className="relative h-[100vh] w-full">
+//         <Image
+//           src={urlFor(post.thumbnail).url()!}
+//           alt={post.title}
+//           fill
+//           className="object-fill w-full h-[100vh]" 
+//         />
+//       </section>
+
+//       {/* BLOG CONTENT */}
+//       <section className="px-5 md:px-20 py-16 max-w-5xl mx-auto">
+//         {/* Title */}
+//         <h1 className="text-4xl md:text-5xl font-bold mb-4">{post.title}</h1>
+
+//         {/* Author & Date */}
+//         <div className="flex flex-wrap items-center text-gray-400 text-sm mb-8 gap-2">
+//           {post.author && <span>By {post.author}</span>}
+//           {post.author && post.date && <span>•</span>}
+//           {post.date && (
+//             <span className="flex items-center gap-1">
+//               <CalendarDays className="w-4 h-4" />
+//               {new Date(post.date).toLocaleDateString("en-US", {
+//                 year: "numeric",
+//                 month: "long",
+//                 day: "numeric",
+//               })}
+//             </span>
+//           )}
+//           <span>•</span>
+//           <span className="flex items-center gap-1">
+//             <Clock className="w-4 h-4" />
+//             5 min read
+//           </span>
+//         </div>
+
+//         {/* Content */}
+//         <div className="prose prose-invert prose-lg text-white leading-relaxed">
+//           {post.content && <PortableText value={post.content} components={PortableTextComponents} />}
+//         </div>
+//       </section>
+//     </div>
+//   );
+// }
+
+
+
+
+
+
+import { client } from "@/sanity/lib/client";
+import Image from "next/image";
+import { PortableText } from "@portabletext/react";
+import { PortableTextComponents } from "../../components/PortableTextComponents";
+import { CalendarDays, Clock } from "lucide-react";
+import { urlFor } from "@/sanity/lib/image";
+
+export default async function BlogDetails({
+  params,
+}: {
+  params: Promise<{ slug: string }>;  // Updated: params is now a Promise
+}) {
+  const { slug } = await params;  // Updated: Await params before destructuring
 
   const query = `*[_type == "post" && slug.current == $slug][0]{
     title,
     date,
     content,
     thumbnail,
-    "author": author->name,
-    "authorImage": author->image
-  }`
+    "author": author->name
+  }`;
 
-  const post: Post | null = await client.fetch(query, { slug })
+  const post = await client.fetch(query, { slug });
 
   if (!post) {
     return (
-      <section className="container mx-auto px-6 py-20 text-center">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-2">Post Not Found</h2>
-        <p className="text-gray-500">
-          The article you’re looking for doesn’t exist or may have been removed.
-        </p>
-      </section>
-    )
+      <div className="p-10 text-center text-white">Service not found.</div>
+    );
   }
 
   return (
-    <section className="bg-white min-h-screen py-10 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto overflow-hidden">
-        <div className="px-6 pt-8">
-          <span className="inline-block bg-pink-100 text-pink-700 text-xs font-semibold px-3 py-1 rounded-full mb-4">
-            Featured
-          </span>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-snug mb-4">
-            {post.title}
-          </h1>
-        </div>
+    <div className="bg-primary-900 text-white min-h-screen">
+      {/* HERO IMAGE */}
+      <section className="relative mx-auto h-[100vh] w-[90vw]">
+        <Image
+          src={urlFor(post.thumbnail).url()!}
+          alt={post.title}
+          fill
+          className="object-fill w-[90vw] h-[100vh] mt-5 rounded-lg" 
+        />
+      </section>
 
-        <div className="flex flex-wrap items-center gap-3 px-6 text-sm text-gray-500 mb-6">
-          {post.authorImage && (
-            <Image
-              src={urlFor(post.authorImage).width(64).height(64).url()!}
-              alt={post.author ?? 'Author image'}
-              width={40}
-              height={40}
-              className="rounded-full object-cover"
-            />
-          )}
-          <p className="text-gray-800 font-medium">{post.author}</p>
-          <span>•</span>
-          <div className="flex items-center gap-1">
-            <CalendarDays className="w-4 h-4" />
-            {post.date &&
-              new Date(post.date).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
+      {/* BLOG CONTENT */}
+      <section className="px-5 md:px-20 py-16 max-w-5xl mx-auto">
+        {/* Title */}
+        <h1 className="text-4xl md:text-5xl font-bold mb-4">{post.title}</h1>
+
+        {/* Author & Date */}
+        <div className="flex flex-wrap items-center text-gray-400 text-sm mb-8 gap-2">
+          {post.author && <span>By {post.author}</span>}
+          {post.author && post.date && <span>•</span>}
+          {post.date && (
+            <span className="flex items-center gap-1">
+              <CalendarDays className="w-4 h-4" />
+              {new Date(post.date).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
               })}
-          </div>
+            </span>
+          )}
           <span>•</span>
-          <div className="flex items-center gap-1">
+          <span className="flex items-center gap-1">
             <Clock className="w-4 h-4" />
             5 min read
-          </div>
+          </span>
         </div>
 
-        {post.thumbnail && (
-          <div className="relative w-full h-[250px] sm:h-[400px] md:h-[450px] mb-8 px-6">
-            <div className="relative w-full h-full overflow-hidden rounded-xl">
-              <Image
-                src={urlFor(post.thumbnail).width(1600).height(900).url()!}
-                alt={post.title}
-                fill
-                className="object-cover"
-              />
-            </div>
-          </div>
-        )}
-
-        <div className="px-6 pb-10 prose prose-gray max-w-none text-gray-700 leading-relaxed">
-          <PortableText value={post.content as any} />
+        {/* Content */}
+        <div className="prose prose-invert prose-lg text-white leading-relaxed">
+          {post.content && <PortableText value={post.content} components={PortableTextComponents} />}
         </div>
-      </div>
-    </section>
-  )
+      </section>
+    </div>
+  );
 }

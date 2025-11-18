@@ -17,7 +17,7 @@ export default function Footer() {
                       height={80}
                       className="rounded-lg transition-transform duration-300 group-hover:scale-105"
                     />
-          <p className="mt-4 text-black text-sm leading-relaxed">
+          <p className="mt-4 text-black text-md font-semibold leading-relaxed">
             Innovation Tower, Shahrah-e-Faisal, Karachi – Pakistan
             <br />
             <span className="block mt-2">
@@ -33,10 +33,10 @@ export default function Footer() {
 
         {/* ⚡ Quick Links */}
         <div>
-          <h4 className="text-lg font-semibold mb-4 text-black">
+          <h4 className="text-2xl font-bold mb-4 text-primary-700">
             Quick Links
           </h4>
-          <ul className="space-y-2 text-sm text-black">
+          <ul className="space-y-2 text-md font-semibold text-black">
             {[
               { name: "Services", href: "/services" },
               { name: "Careers", href: "/careers" },
@@ -57,10 +57,10 @@ export default function Footer() {
 
         {/* 📨 Newsletter */}
         <div>
-          <h4 className="text-lg font-semibold mb-4 text-black">
+          <h4 className="text-2xl font-bold mb-4 text-primary-700">
             Stay Updated
           </h4>
-          <p className="text-sm text-black mb-3">
+          <p className="text-md font-semibold text-black mb-3">
             Subscribe to our newsletter to get the latest updates and insights.
           </p>
           <NewsletterForm />

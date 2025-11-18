@@ -9,12 +9,14 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          50: '#eef2ff',
-          500: '#4f46e5',
-          700: '#3730a3'
-        }
-      }
-    }
+          50: '#F7FBFF',   // Off White
+          100: '#E9F2FA',
+          500: '#1F6FBF',  // Accent Blue
+          700: '#113B65',  // Soft Navy
+          900: '#0A1A2F',  // Deep Navy
+        },
+      },
+    },
   },
   plugins: []
 }
