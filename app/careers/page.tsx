@@ -18,7 +18,7 @@ const steps = [
   {
     id: 3,
     title: 'Personal Interview',
-    src: '/services/personal.jpg',
+    src: '/services/associate.jpg',
   },
   {
     id: 4,
