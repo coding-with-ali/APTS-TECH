@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaRobot, FaPaperPlane } from "react-icons/fa";
+import Image from "next/image";
 
 export default function ChatbotWidget({ autoOpen = false }) {
   const [open, setOpen] = useState(autoOpen);
@@ -52,7 +53,13 @@ export default function ChatbotWidget({ autoOpen = false }) {
           transition={{ type: "spring", stiffness: 200, damping: 10 }}
           className="fixed bottom-6 right-6 z-[9999] bg-primary-500 text-white p-4 rounded-full shadow-2xl hover:scale-110 hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] transition-all duration-300"
         >
-          <FaRobot className="w-12 h-12" />
+          <Image
+          src="/robot.png"
+          alt="robot icon"
+          width="900"
+          height="900"
+          className="w-12 h-12"
+          />
         </motion.button>
       )}
 
