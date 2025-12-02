@@ -1,3 +1,5 @@
+
+
 "use client";
 
 import { motion } from "framer-motion";
@@ -31,50 +33,74 @@ const testimonials = [
       "They developed a custom application for our startup, and the quality was outstanding. Secure, scalable, and very easy for our team to manage.",
     rating: 5,
   },
+  {
+    name: "Sophia Williams",
+    location: "San Francisco",
+    quote:
+      "Absolutely brilliant work! Their AI-powered solution saved us countless hours and improved our workflow efficiency dramatically.",
+    rating: 5,
+  },
+  {
+    name: "Michael Brown",
+    location: "Seattle",
+    quote:
+      "High-quality, responsive, and visually stunning. The team exceeded our expectations on every front.",
+    rating: 5,
+  },
 ];
-
 
 export default function TestimonialGrid() {
   return (
-    <section className="relative bg-primary-50 py-20 px-6 md:px-20 overflow-hidden">
-      {/* Subtle background shapes */}
-      <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/3 w-[700px] h-[700px] bg-gradient-to-r from-indigo-100 to-purple-200 rounded-full opacity-50 blur-3xl pointer-events-none"></div>
-      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-gradient-to-r from-pink-100 to-orange-100 rounded-full opacity-30 blur-2xl pointer-events-none"></div>
-      <div className="absolute top-1/4 right-0 w-[300px] h-[300px] bg-gradient-to-r from-yellow-100 to-green-100 rounded-full opacity-20 blur-xl pointer-events-none"></div>
+    <section className="relative py-24 px-6 sm:px-12 lg:px-20 bg-[#fff] overflow-hidden">
+      
+      {/* Floating background shapes */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-[10%] left-[5%] w-[350px] h-[350px] bg-[#00E5FF33] rounded-full blur-[140px]" />
+        <div className="absolute bottom-[5%] right-[10%] w-[450px] h-[450px] bg-[#00E5FF22] rounded-full blur-[160px]" />
+        <div className="absolute top-[20%] right-[10%] w-[250px] h-[250px] bg-[#00E5FF11] rounded-full blur-[80px]" />
+      </div>
 
-      <div className="relative max-w-6xl mx-auto text-center">
-        <h2 className="text-3xl md:text-4xl font-extrabold mb-4">
+      {/* Section header */}
+      <div className="relative z-10 text-center mb-16 max-w-3xl mx-auto">
+        <h2 className="text-4xl md:text-5xl font-extrabold mb-4">
           What Our Customers Are Saying
         </h2>
-        <p className="text-gray-500 mb-12">
+        <p className="text-lg">
           Lumirex empowers teams to automate tasks, visualize data, and make better business decisions. Here’s what our customers love about it:
         </p>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {testimonials.map((t, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="relative bg-gradient-to-br from-white to-indigo-50 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300"
-            >
-              <p className="text-gray-700 italic mb-4">{`"${t.quote}"`}</p>
-              <div className="flex justify-between items-center">
-                <div>
-                  <h4 className="text-primary-500 font-semibold">{t.name}</h4>
-                  <p className="text-gray-400 text-sm">{t.location}</p>
-                </div>
-                <div className="flex space-x-1">
-                  {Array.from({ length: t.rating }).map((_, i) => (
-                    <span key={i} className="text-yellow-400">&#9733;</span>
-                  ))}
-                </div>
+      {/* Pinterest-style Masonry Grid */}
+      <div className="relative z-10 columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
+        {testimonials.map((t, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: index * 0.1 }}
+            viewport={{ once: true }}
+            className="break-inside-avoid bg-[#0A2A4F] backdrop-blur-md border border-[#00E5FF33] rounded-3xl p-6 mb-6 shadow-[0_0_20px_#00E5FF22] hover:shadow-[0_0_30px_#00E5FF44] hover:-translate-y-2 transform transition-all duration-500"
+          >
+            {/* Quote */}
+            <p className="text-white italic mb-4">"{t.quote}"</p>
+
+            {/* Customer info */}
+            <div className="flex justify-between items-center mb-2">
+              <div>
+                <h4 className="text-[#00E5FF] font-semibold">{t.name}</h4>
+                <p className="text-white text-sm">{t.location}</p>
               </div>
-            </motion.div>
-          ))}
-        </div>
+              <div className="flex space-x-1">
+                {Array.from({ length: t.rating }).map((_, i) => (
+                  <span key={i} className="text-yellow-400">&#9733;</span>
+                ))}
+              </div>
+            </div>
+
+            {/* Floating neon accent */}
+            <div className="absolute top-3 right-3 w-3 h-3 rounded-full bg-[#00E5FF] animate-pulse" />
+          </motion.div>
+        ))}
       </div>
     </section>
   );

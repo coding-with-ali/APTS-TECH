@@ -1,15 +1,38 @@
-import type { NextRequest } from 'next/server'
+import { NextResponse } from "next/server";
+import { createClient } from "@sanity/client";
 
-export async function POST(req: NextRequest) {
+const serverClient = createClient({
+  projectId: "si2ayh8p",
+  dataset: "production",
+  token: process.env.SANITY_API_TOKEN, // 🔑 server-side write token
+  useCdn: false,
+  apiVersion: "2024-01-01",
+});
+
+export async function POST(req: Request) {
   try {
-    const { name, email, message } = await req.json()
-    if (!name || !email || !message) {
-      return new Response(JSON.stringify({ error: 'All fields required' }), { status: 400 })
-    }
+    const body = await req.json();
 
-    // TODO: integrate email/Sanity
-    return new Response(JSON.stringify({ success: true }), { status: 200 })
-  } catch (e) {
-    return new Response(JSON.stringify({ error: 'Server error' }), { status: 500 })
+    const doc = {
+      _type: "contactForm",
+      fullName: body.fullName,
+      email: body.email,
+      phone: body.phone,
+      country: body.country,
+      companyName: body.companyName,
+      companyUrl: body.companyUrl,
+      region: body.region,
+      services: body.services,
+      projectDetails: body.projectDetails,
+      lookingForJob: body.lookingForJob,
+      createdAt: new Date().toISOString(),
+    };
+
+    const res = await serverClient.create(doc);
+
+    return NextResponse.json({ message: "Form submitted successfully!", data: res }, { status: 201 });
+  } catch (err: any) {
+    console.error("Sanity Submit Error:", err);
+    return NextResponse.json({ error: "Failed to submit form", details: err.message }, { status: 500 });
   }
 }

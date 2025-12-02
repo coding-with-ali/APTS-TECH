@@ -1,79 +1,83 @@
-
-
-// ChatbotWidget.jsx - Professional UI/UX
 "use client";
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaRobot } from 'react-icons/fa';
+import { FaRobot, FaPaperPlane } from "react-icons/fa";
 
-export default function ChatbotWidget() {
-  const [open, setOpen] = useState(false);
+export default function ChatbotWidget({ autoOpen = false }) {
+  const [open, setOpen] = useState(autoOpen);
   const [messages, setMessages] = useState([
-    { role: "assistant", text: "Hello sir, can I help you?" }
+    { role: "assistant", text: "Hello sir, can I help you?", time: new Date() },
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-
   const chatRef = useRef<HTMLDivElement | null>(null);
 
-useEffect(() => {
-  if (!chatRef.current) return;
-  chatRef.current.scrollTop = chatRef.current.scrollHeight;
-}, [messages, loading]);
+  // Auto-scroll
+  useEffect(() => {
+    if (!chatRef.current) return;
+    const timer = setTimeout(() => {
+      chatRef.current?.scrollTo({ top: chatRef.current.scrollHeight, behavior: "smooth" });
+    }, 50);
+    return () => clearTimeout(timer);
+  }, [messages, loading]);
 
-
+  // Send Message
   const sendMessage = async () => {
     if (!input.trim()) return;
-
-    const userMsg = { role: "user", text: input };
+    const userMsg = { role: "user", text: input, time: new Date() };
     setMessages((prev) => [...prev, userMsg]);
     setLoading(true);
 
     const res = await fetch("/api/chatbot", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: input })
+      body: JSON.stringify({ message: input }),
     });
-
     const data = await res.json();
     setLoading(false);
-
-    const botMsg = { role: "assistant", text: data.reply };
+    const botMsg = { role: "assistant", text: data.reply, time: new Date() };
     setMessages((prev) => [...prev, botMsg]);
     setInput("");
   };
 
   return (
     <div>
-      {/* Floating Button */}
-      <motion.button
-        onClick={() => setOpen(true)}
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ type: "spring", stiffness: 200, damping: 10 }}
-        className="fixed bottom-6 right-6 z-[9999] bg-primary-900 text-white p-4 rounded-full shadow-2xl hover:shadow-blue-400/40 hover:scale-110 transition duration-300"
-      >
-        <FaRobot className="w-5 h-5" />
-      </motion.button>
+      {/* Floating Robot Button */}
+      {!autoOpen && (
+        <motion.button
+          onClick={() => setOpen(true)}
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ type: "spring", stiffness: 200, damping: 10 }}
+          className="fixed bottom-6 right-6 z-[9999] bg-primary-500 text-white p-4 rounded-full shadow-2xl hover:scale-110 hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] transition-all duration-300"
+        >
+          <FaRobot className="w-12 h-12" />
+        </motion.button>
+      )}
 
       {/* Chat Window */}
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 50 }}
-            transition={{ duration: 0.3 }}
-            className="fixed bottom-24 right-6 z-[9999] w-80 bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-gray-200 backdrop-blur-xl"
+            initial={{ opacity: 0, y: 50, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 50, scale: 0.95 }}
+            className="
+              fixed bottom-24 right-6
+              z-[9999] w-80 sm:w-96
+              bg-white rounded-3xl 
+              shadow-2xl border border-gray-200
+              flex flex-col overflow-hidden
+            "
           >
             {/* Header */}
-            <div className="bg-primary-900 text-white p-4 flex justify-between items-center shadow-md">
-              <h3 className="font-semibold tracking-wide">APTS Techs Support</h3>
-              <button
-                onClick={() => setOpen(false)}
-                className="text-white text-xl hover:text-gray-200"
-              >
+            <div className="bg-primary-900 text-white p-4 flex justify-between items-center">
+              <div className="flex items-center gap-2">
+                <FaRobot className="w-6 h-6" />
+                <h3 className="font-semibold text-lg">APTS Tech Support</h3>
+              </div>
+              <button onClick={() => setOpen(false)} className="text-white text-xl font-bold">
                 ×
               </button>
             </div>
@@ -81,30 +85,35 @@ useEffect(() => {
             {/* Messages */}
             <div
               ref={chatRef}
-              className="p-4 h-96 overflow-y-auto space-y-3 bg-gray-50 custom-scroll"
+              className="p-4 h-96 overflow-y-auto bg-gray-50 flex flex-col gap-3 custom-scroll"
             >
               {messages.map((msg, i) => (
-                <motion.div
+                <div
                   key={i}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.2 }}
-                  className={`p-3 rounded-2xl max-w-[80%] shadow-sm ${
-                    msg.role === "assistant"
-                      ? "bg-blue-100 text-gray-900 self-start"
-                      : "bg-green-100 text-gray-900 self-end ml-auto"
-                  }`}
+                  className={`flex flex-col ${
+                    msg.role === "assistant" ? "self-start" : "self-end"
+                  } max-w-[80%]`}
                 >
-                  {msg.text}
-                </motion.div>
+                  <div
+                    className={`p-3 rounded-2xl relative ${
+                      msg.role === "assistant"
+                        ? "bg-blue-100 text-gray-800"
+                        : "bg-green-200 text-gray-900"
+                    }`}
+                  >
+                    {msg.text}
+                    <span className="absolute bottom-0 right-2 text-xs text-gray-500 opacity-70">
+                      {msg.time.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                    </span>
+                  </div>
+                </div>
               ))}
 
               {loading && (
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ repeat: Infinity, duration: 0.8 }}
-                  className="bg-blue-100 p-3 rounded-2xl w-fit text-gray-600"
+                  className="self-start bg-blue-100 p-3 rounded-2xl w-fit text-gray-600"
                 >
                   Typing...
                 </motion.div>
@@ -112,34 +121,24 @@ useEffect(() => {
             </div>
 
             {/* Input */}
-            <div className="p-3 flex gap-2 border-t bg-white">
+            <div className="p-3 flex gap-2 border-t border-gray-200 bg-white">
               <input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-                className="flex-1 border rounded-xl p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="flex-1 border border-gray-300 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
                 placeholder="Type your message..."
               />
               <button
                 onClick={sendMessage}
-                className="bg-primary-700 text-white px-4 py-2 rounded-xl hover:bg-primary-500 shadow-md"
+                className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-full transition"
               >
-                ➤
+                <FaPaperPlane />
               </button>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-
-      <style>{`
-        .custom-scroll::-webkit-scrollbar {
-          width: 6px;
-        }
-        .custom-scroll::-webkit-scrollbar-thumb {
-          background: #cbd5e1;
-          border-radius: 10px;
-        }
-      `}</style>
     </div>
   );
 }

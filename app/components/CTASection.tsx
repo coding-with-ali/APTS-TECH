@@ -1,35 +1,39 @@
-import Link from 'next/link'
+"use client";
+
+import Link from "next/link";
 
 export default function CTASection() {
   return (
-    <section className="relative overflow-hidden bg-primary-900 text-white py-24 px-6 md:px-12 lg:px-20 text-center  shadow-[0_0_40px_-10px_rgba(99,102,241,0.4)]">
-      {/* ✨ Background Glow Effects */}
-      <div className="absolute inset-0">
-        <div className="absolute top-[-10%] left-[-10%] w-[300px] h-[300px] bg-indigo-500/20 rounded-full blur-[100px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[350px] h-[350px] bg-purple-500/20 rounded-full blur-[120px]" />
+    <section className="relative overflow-hidden bg-[#fff] py-24 px-6 sm:px-12 lg:px-20 text-center">
+      
+      {/* Floating neon/glow shapes */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* <div className="absolute top-[10%] left-[5%] w-[350px] h-[350px] bg-[#00E5FF33] rounded-full blur-[140px]" /> */}
+        <div className="absolute bottom-[10%] right-[10%] w-[400px] h-[400px] bg-[#00E5FF22] rounded-full blur-[160px]" />
+        <div className="absolute top-[20%] right-[15%] w-[250px] h-[250px] bg-[#00E5FF11] rounded-full blur-[80px]" />
       </div>
 
-      {/* 💬 Content */}
+      {/* CTA content */}
       <div className="relative z-10 max-w-3xl mx-auto">
-        <h2 className="text-4xl md:text-6xl font-extrabold leading-tight bg-primary-500 bg-clip-text text-transparent drop-shadow-md">
+        <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-6">
           Ready to Build Your Next Big Idea?
         </h2>
 
-        <p className="mt-8 text-primary-50 text-base md:text-lg leading-relaxed">
+        <p className="mt-4 text-lg md:text-xl leading-relaxed">
           Let’s turn your vision into reality with innovative, scalable, and future-ready technology solutions.
         </p>
 
         <div className="mt-10 flex justify-center">
           <Link
             href="/contact"
-            className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-primary-500 px-8 py-4 text-lg font-semibold text-primary-50 transition-all duration-300 hover:bg-primary-700"
+            className="group relative inline-flex items-center justify-center overflow-hidden rounded-2xl bg-[#00E5FF] px-10 py-4 text-lg font-bold text-[#0A1A2F] shadow-[0_0_20px_#00E5FF66] hover:shadow-[0_0_30px_#00E5FF88] transition-all duration-500"
           >
-            <span className="relative  transition-colors duration-300">
-              Get in Touch →
-            </span>
+            <span className="relative">Get in Touch →</span>
+            {/* Floating neon effect */}
+            <span className="absolute w-3 h-3 bg-[#00E5FF] rounded-full top-0 right-0 animate-pulse"></span>
           </Link>
         </div>
       </div>
     </section>
-  )
+  );
 }

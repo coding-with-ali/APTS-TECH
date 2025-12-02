@@ -1,6 +1,8 @@
 import { client } from "@/sanity/lib/client";
 import Image from "next/image";
 import { PortableText } from "@portabletext/react";
+import CTASection from "@/app/components/CTASection";
+import ContactSection from "@/app/components/ContactForm";
 
 interface PageProps {
   params: { slug: string };
@@ -30,12 +32,11 @@ export default async function ServiceDetail({
   }
 
   return (
-    <div className="bg-primary-900 text-white">
-
+    <div className="bg-[#081527] ">
 
 <div className="absolute inset-0">
         <div className="absolute top-[-80%] left-[-10%] w-[300px] h-[300px] bg-indigo-500/20 rounded-full blur-[100px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[350px] h-[350px] bg-primary-500 rounded-full blur-[120px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[350px] h-[350px] bg-primary-500/0 rounded-full blur-[120px]" />
       </div>
 
       {/* 🔥 HERO SECTION WITH BACKGROUND IMAGE + BLUR CARD */}
@@ -53,10 +54,10 @@ export default async function ServiceDetail({
   <div className="backdrop-blur-xl bg-white/20 rounded-3xl p-10 w-[95vw]">
             
 
-          <h1 className="text-4xl md:text-5xl font-bold my-3">
+          <h1 className="text-4xl md:text-5xl text-white font-bold my-3">
               {service.title}
             </h1>
-            <p className="text-lg leading-relaxed text-gray-200 mb-6">
+            <p className="text-lg leading-relaxed text-white mb-6">
             {service.description}
           </p>
 
@@ -93,6 +94,8 @@ export default async function ServiceDetail({
           />
         )}
       </section>
+    <CTASection/>
+    <ContactSection/>
     </div>
   );
 }

@@ -27,7 +27,7 @@ export default function NewsletterForm() {
         placeholder="Your email"
         className="p-2 rounded-l border-amber-50 border text-white w-full"
       />
-      <button type="submit" className="bg-primary-700 hover:bg-primary-500 border px-4 rounded-lg text-white font-medium">
+      <button type="submit" className="bg-primary-700 hover:bg-primary-500 border px-4 text-white font-medium">
         Subscribe
       </button>
       {status === 'success' && <p className="text-green-400 text-sm mt-2">Subscribed!</p>}

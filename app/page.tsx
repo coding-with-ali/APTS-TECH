@@ -4,15 +4,19 @@ import Testimonial from './components/Testimonial'
 import CTASection from './components/CTASection'
 import PostCard from './components/PostCard'
 import Awards from './components/Award'
+import ContactForm from './components/ContactForm'
+import RobotOverlay from './components/RobotOverlay'
 
 export default function Home() {
   return (
     <>
+      <div className="">
       <Hero />
-      <div className="container py-16 space-y-20">
+      <RobotOverlay/>
         <Awards/>
         <ServicesGrid />
         <Testimonial />
+        <ContactForm/>
         <CTASection />
         <PostCard/>
       </div>

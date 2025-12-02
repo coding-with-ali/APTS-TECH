@@ -1,4 +1,3 @@
-
 'use client'
 
 import { useEffect, useState } from "react"
@@ -21,25 +20,40 @@ export default function ServicesGrid() {
   useEffect(() => {
     async function load() {
       const data = await client.fetch(allServicesQuery)
-      setServices(data)
+
+      // ★ CUSTOM ORDER FOR DISPLAY ★
+      const order = [
+        "Web Development",
+        "Software Development",
+        "AI & Machine Learning",
+        "Mobile App Development",
+        "Cybersecurity Solutions",
+        "Cloud & DevOps"
+      ]
+
+      const sorted = data.sort(
+        (a: Service, b: Service) =>
+          order.indexOf(a.title) - order.indexOf(b.title)
+      )
+
+      setServices(sorted)
     }
     load()
   }, [])
 
   return (
-    <section className="relative py-20 bg-primary-900 text-primary-50 overflow-hidden">
+    <section className="relative py-20 px-6 sm:px-12 lg:px-20 bg-[#0A1A2F] text-white overflow-hidden">
 
-      {/* ✨ Background Glow Effects */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-[-20%] left-[-20%] w-[300px] h-[300px] bg-indigo-500/20 rounded-full blur-[120px]" />
-        <div className="absolute bottom-[-20%] right-[-20%] w-[350px] h-[350px] bg-purple-500/20 rounded-full blur-[140px]" />
+      {/* BACKGROUND SHAPES */}
+      <div className="absolute inset-0">
+        <div className="absolute left-[10%] bottom-[15%] w-[350px] h-[350px] bg-[#00E5FF22] rounded-full blur-[120px]" />
       </div>
-      
+
       <div className="relative z-10 text-center mb-16 px-6">
-        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+        <h2 className="text-3xl md:text-6xl font-black text-white mb-4">
           <span className="text-primary-500">Our</span> Core Services
         </h2>
-        <p className="text-gray-300 max-w-2xl mx-auto text-lg">
+        <p className="text-gray-300 max-w-2xl mx-auto text-sm md:text-lg">
           Transforming ideas into digital excellence — crafting solutions that drive innovation, security, and success.
         </p>
       </div>
@@ -78,7 +92,7 @@ export default function ServicesGrid() {
             <Link
               href={`/services/${service.slug.current}`}
               className="mt-auto inline-block bg-primary-700 text-white font-semibold 
-                         py-2 px-5 rounded-xl hover:bg-primary-500 transition-colors duration-300"
+                         py-2 px-5 rounded-xl transition-colors duration-300"
             >
               Read More
             </Link>
